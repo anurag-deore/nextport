@@ -3,25 +3,279 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: rgb(55 48 163);
+  --primaryBg: rgb(238 242 255);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: "Clash Grotesk Variable", sans-serif; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+code {
+  font-family: "Overpass Mono", monospace;
+  font-size: 2rem;
+  letter-spacing: -0.1rem;
+  padding: 0 1rem;
+}
+
+.handwriting {
+  font-family: "Satisfy";
+  padding: 0 1rem;
+}
+
+.handwriting-2 {
+  font-family: "EQUINOX";
+  font-size: 2rem;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  .icon-box {
+    @apply bg-slate-100 rounded-lg text-slate-800 h-[60px] w-[60px] md:w-[60px] md:h-[60px] grid place-items-center;
+  }
 }
+
+@keyframes morph-radius {
+  0% {
+    border-radius: 8px;
+    transform: rotate(0deg);
+  }
+  /* 50% {
+    border-radius: 99px;
+    transform: rotate(90deg);
+  } */
+  100% {
+    border-radius: 35px;
+    transform: rotate(45deg);
+    /* transform: rotate(180deg);
+    border-radius: 8px; */
+  }
+}
+.animate-morph {
+  border-radius: 8px;
+}
+
+.animate-morph:hover {
+  border: 1px dashed #000;
+  /* animation: morph-radius 0.3s ease-in-out forwards; */
+}
+
+.visualizer {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.bar {
+  width: 10px;
+  height: 30px;
+  background-color: #4b40ee;
+  animation: bounce 0.5s infinite ease-in-out;
+}
+
+.bar:nth-child(1) {
+  animation-delay: 0s;
+}
+.bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    height: 20px;
+  }
+  50% {
+    height: 100px;
+  }
+}
+
+/* ------------ Old CSS below ------------ */
+
+#bgDiv {
+  overflow: hidden;
+  background: url("/assets/lines.svg");
+  background-size: 100vw 100vh; /* Match the pattern size */
+  background-repeat: repeat;
+  animation: none;
+}
+
+.lnesbg {
+  background-image: url("/assets/lines.svg");
+  animation: animatebg 0.5s linear infinite;
+}
+
+@keyframes animatedbgscreen {
+  from {
+    transform: translateX(0vw);
+  }
+  to {
+    transform: translateX(-100vw);
+  }
+}
+.animatedBGDiv {
+  background: url("/assets/lines.svg");
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  background-size: cover;
+  animation: animatedbgscreen 10s linear infinite;
+}
+
+#Frame4 {
+  animation: rotate 0.5s linear infinite;
+  transform-origin: 77% 85%;
+}
+#Frame3 {
+  animation: rotate 0.5s linear infinite;
+  transform-origin: 24.5% 85%;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bgmountains {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* background: url("/assets/bgframe.svg");
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: auto 100%;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/assets/bgframe.svg");
+  animation: animatebg 3s ease-in-out infinite; */
+}
+#Frame4.paused,
+#Frame3.paused,
+.bgmountains.paused {
+  animation-play-state: paused;
+}
+
+@keyframes animatebg {
+  from {
+    background-position: 0 0;
+  }
+  /*use negative width if you want it to flow right to left else and positive for left to right*/
+  to {
+    background-position: 25% 0;
+  }
+}
+.slide-across {
+  animation: slide 10s linear infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.outlinetext {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px;
+}
+
+.bg-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  animation: move-pattern 30s linear infinite;
+}
+
+@keyframes move-pattern {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ------------ Framer Motion ------------ */
+
+.page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.light {
+  background-color: #ffffff;
+  color: #1a243a;
+}
+
+.dark {
+  background-color: #1a243a;
+  color: #ffffff;
+}
+
+.navbar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.toggle-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #6f7177;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.toggle-button:hover {
+  transform: scale(1.1);
+}
+
+.expand-menu {
+  width: 100px;
+  transition: all 0.3s ease;
+}
+
+/* ------------ Theme Wrapper ------------ */

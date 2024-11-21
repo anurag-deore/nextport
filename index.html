@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+      rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Bricolage Grotesque', sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div class="h-screen"></div> -->
+    <!-- <div id="primary" class=" justify-center items-center gap-20 h-screen bg-red-50 flex">
+      <h1 class="text-5xl font-bold"> actually Dibolical process</p>
+    </div> -->
+    <section class="w-full h-screen flex-1 grid place-content-center bg-blue-100"> Section 1</section>
+    <div class="outer overflow-x-hidden">
+      <div class="flex hscroll" style="width:300%">
+        <section class="w-full h-screen flex-1 grid place-content-center bg-yellow-100"> Section 1</section>
+        <section class="w-full h-screen flex-1 grid place-content-center bg-purple-100"> Section 2</section>
+        <section class="w-full h-screen flex-1 grid place-content-center bg-red-100"> Section 3</section>
+      </div>
+    </div>
+    <section class="w-full h-screen flex-1 grid place-content-center bg-rose-100"> Section 1</section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+
+      /* const text = new SplitType("#primary h1");
+
+      const tl = gsap.timeline({
+        defaults: {
+          ease: "power3.inOut",
+          duration: 1
+        }
+      });
+      gsap.set("#primary h1", { autoAlpha: 1 });
+
+      tl.from(text.chars, {
+        y: 40,
+        opacity: 0,
+        skewX: 30,
+        stagger: 0.03,
+        duration: 1
+      }) */
+
+      let scroller = document.querySelector(".hscroll");
+      let sections = gsap.utils.toArray(".hscroll section");
+
+      let scrollTween = gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hscroll",
+          pin: true,
+          scrub: true,
+          snap: 1 / (sections.length - 1),
+          end: () => "+=" + scroller.offsetWidth
+        }
+      });
+
+    </script>
+  </body>
+
+</html>
